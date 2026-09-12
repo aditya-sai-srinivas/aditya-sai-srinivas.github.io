@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Writing — Aditya Sai Srinivas</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-toggle">
+
+<div class="topbar">
+  <span class="brand">~/aditya</span>
+  <label for="nav-toggle">menu</label>
+</div>
+
+<nav class="sidebar">
+  <div class="whoami"><span class="prompt">$</span> cat writing/*.md</div>
+  <ul class="tree">
+    <li><a href="index.html">about.md</a></li>
+    <li class="dir">projects/</li>
+    <li><a href="projects.html">&nbsp;&nbsp;index</a></li>
+    <li class="dir">writing/</li>
+    <li><a href="writing.html" class="active">&nbsp;&nbsp;index</a></li>
+    <li><a href="talks.html">talks.md</a></li>
+  </ul>
+  <div class="external">
+    <a href="mailto:srinivas.adi95@gmail.com">email</a>
+    <a href="https://linkedin.com/in/aditya-sai-srinivas/">linkedin</a>
+    <a href="#">github</a>
+  </div>
+</nav>
+
+<main class="main">
+  <h1>Writing</h1>
+  <p class="tagline">Notes from production work — including the parts that didn't work</p>
+
+  <div class="write-list">
+    <a class="entry" href="#vggt-omega">
+      <div class="meta">EVALUATION NOTE · 2026</div>
+      <h3>Why VGGT-Omega didn't work for our light stage</h3>
+      <p>A feed-forward reconstructor evaluated against real capture data, and where it fell short of a calibration-based pipeline.</p>
+    </a>
+    <a class="entry" href="#pde-notes">
+      <div class="meta">METHOD NOTE · 2026</div>
+      <h3>Estimating physical properties without a mesh</h3>
+      <p>Notes on the Walk-on-Spheres line of work, mesh-free PDE solving, and why it's relevant to sim-ready 3D assets.</p>
+    </a>
+  </div>
+
+  <article class="post" id="vggt-omega">
+    <h2>Why VGGT-Omega didn't work for our light stage</h2>
+    <div class="meta">EVALUATION NOTE · 2026</div>
+
+    <p>Our reconstruction pipeline is built on calibrated multi-view capture: 30 cameras and 9 projectors, calibrated to sub-0.2mm reprojection accuracy, feeding a custom distorted-camera-model pipeline that's been industrialized across two hardware generations. It's not a glamorous architecture. It's also the reason the geometry we ship to clients like Amazon, Meta, and Nike holds up under scrutiny.</p>
+
+    <p>Feed-forward reconstructors have gotten good fast, so periodically it's worth asking whether a learned, calibration-free approach could replace part of that pipeline. I ran VGGT-Omega against our own capture data to find out.</p>
+
+    <p>It didn't hold up. The geometry it recovered was plausible at a glance but fell short of the accuracy our production pipeline requires once you look closely at fine structure and metric scale. That's not a criticism of the model in general — it's a strong result on the benchmarks it was built for. It's a specific finding about the gap between benchmark-grade and production-grade for a use case with a tight accuracy bar and a capture setup (structured light, known camera/projector geometry) that a general feed-forward model isn't built to exploit.</p>
+
+    <p>The practical upshot: for now, our calibration-based approach stays in production, and the feed-forward literature stays something I track rather than something I've replaced anything with. I'd rather report that plainly than imply otherwise.</p>
+  </article>
+
+  <article class="post" id="pde-notes">
+    <h2>Estimating physical properties without a mesh</h2>
+    <div class="meta">METHOD NOTE · 2026</div>
+
+    <p>Part of what I guide our PhD interns on is encoding mechanical material properties — things like Young's modulus and Poisson's ratio — directly into reconstructed geometry, so that a scanned object isn't just visually right but physically usable downstream (in simulation, in engineering analysis, wherever the asset ends up).</p>
+
+    <p>The classical way to estimate these properties involves building a volumetric mesh and solving a PDE (typically via finite element methods) over it. Meshing is often the expensive, fragile part — a poor mesh produces poor results no matter how good your solver is, and meshing complex or thin geometry reliably is its own research problem.</p>
+
+    <p>The Walk-on-Spheres line of work (associated with Rohan Sawhney and collaborators) sidesteps this: it solves the same class of PDE directly on the geometry, without ever constructing a volumetric mesh, using a Monte Carlo method that recursively samples spheres inscribed in the domain. It's a genuinely different way to think about the problem — geometry processing and PDE solving without the meshing step in between.</p>
+
+    <p>My own contribution to <a href="projects.html">Zombie</a>, the open-source project implementing this line of work, was building out its CI and testing infrastructure — not the numerical method itself. But it's the reason I spend time with this material at all: the mesh-free framing is directly relevant to the inverse-FEM direction I'm currently guiding our interns on, and it's the kind of geometry problem I'd like to spend more of my time on going forward.</p>
+  </article>
+</main>
+
+</body>
+</html>

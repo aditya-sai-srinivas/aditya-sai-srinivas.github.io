@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Aditya Sai Srinivas</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-toggle">
+
+<div class="topbar">
+  <span class="brand">~/aditya</span>
+  <label for="nav-toggle">menu</label>
+</div>
+
+<nav class="sidebar">
+  <div class="whoami"><span class="prompt">$</span> cd projects<br>listing 4 items</div>
+  <ul class="tree">
+    <li><a href="index.html">about.md</a></li>
+    <li class="dir">projects/</li>
+    <li><a href="projects.html" class="active">&nbsp;&nbsp;index</a></li>
+    <li class="dir">writing/</li>
+    <li><a href="writing.html">&nbsp;&nbsp;index</a></li>
+    <li><a href="talks.html">talks.md</a></li>
+  </ul>
+  <div class="external">
+    <a href="mailto:srinivas.adi95@gmail.com">email</a>
+    <a href="https://linkedin.com/in/aditya-sai-srinivas/">linkedin</a>
+    <a href="#">github</a>
+  </div>
+</nav>
+
+<main class="main">
+  <h1>Projects</h1>
+  <p class="tagline">Production work and things built outside of it</p>
+
+  <div class="card teal">
+    <div class="meta">ALLSIDES GMBH · 2023–PRESENT</div>
+    <h3>Multi-Camera / Multi-Projector Reconstruction Pipeline</h3>
+    <p>The core geometry reconstruction system I architect and maintain as founding engineer: raw sensor data from 30 cameras and 9 projectors, through custom calibration and a distorted camera model, to point clouds and production geometry at sub-0.2mm reprojection accuracy. Shipped across two hardware generations to Amazon, Meta, Adidas, Nike, and others.</p>
+  </div>
+
+  <div class="card">
+    <div class="meta">PERSONAL · 2024–PRESENT</div>
+    <h3>Divergence Free Correspondence</h3>
+    <p>A C++ library for velocity-field-based 3D point cloud deformation, with parallel correspondence computation. Uses SHOT feature extraction and sparse matrix correspondence, with a nonlinear least-squares optimization pipeline built on Ceres Solver.</p>
+    <div class="links"><a href="#">github →</a></div>
+  </div>
+
+  <div class="card amber">
+    <div class="meta">OPEN SOURCE · rohan-sawhney/zombie</div>
+    <h3>Zombie — Monte Carlo Geometry Processing</h3>
+    <p>An open-source framework for estimating geometric and physical properties of 3D assets by solving PDEs in a mesh-free setting (the Walk-on-Spheres line of work). My contribution was building out the CI and testing infrastructure — see the <a href="writing.html#pde-notes">writing page</a> for why the underlying method interests me.</p>
+    <div class="links"><a href="#">pull request →</a></div>
+  </div>
+
+  <div class="card">
+    <div class="meta">WITH VOLKSWAGEN DATA:LAB · APR–AUG 2021</div>
+    <h3>Geometric Deep Learning for Additive Manufacturing</h3>
+    <p>A deep learning framework built from scratch for 3D mesh/voxel classification, developed in collaboration with Volkswagen Data:Lab, Munich.</p>
+    <div class="links"><a href="#">github →</a></div>
+  </div>
+
+  <div class="card">
+    <div class="meta">PERSONAL · DEC 2020–MAR 2021</div>
+    <h3>Non-Rigid Partial Shape Matching &amp; Completion</h3>
+    <p>A siamese network with a modified ResNet-18 embedding and an hourglass network, for jointly matching and completing non-rigid partial shape data.</p>
+    <div class="links"><a href="#">github →</a></div>
+  </div>
+</main>
+
+</body>
+</html>
